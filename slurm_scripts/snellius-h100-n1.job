@@ -21,20 +21,15 @@ LOG_DIR="runs/1node/"
 
 mkdir -p $LOG_DIR
 
+tests=("all_reduce_perf" "all_gather_perf" "reduce_scatter_perf")
+test_names=("All-Reduce" "All-Gather" "Reduce-scatter")
 
-echo "Testing All-Reduce"
-"$TEST_LOCATION/all_reduce_perf" -b 4 -e 128M -f 2 -g 4 \
-    > "$LOG_DIR/all_reduce.log"
+for i in "${!tests[@]}"; do
+    echo "Testing ${test_names[$i]}"
+    srun -n 8 -N 2 "$TEST_LOCATION/${tests[$i]}" \
+        -b 8 -e 8G -f 2 -g 1 > "$LOG_DIR/${tests[$i]}.log"
+done
 
-
-echo "Testing All-Gather"
-"$TEST_LOCATION/all_gather_perf" -b 4 -e 128M -f 2 -g 4 \
-    > "$LOG_DIR/all_gather_perf.log"
-
-
-echo "Testing All-Reduce"
-"$TEST_LOCATION/reduce_scatter_perf" -b 4 -e 128M -f 2 -g 4 \
-    > "$LOG_DIR/reduce_scatter_perf.log"
 
 
 echo "Stress-testing with many iterations"
