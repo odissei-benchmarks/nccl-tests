@@ -17,12 +17,9 @@ module load NCCL/2.22.3-GCCcore-13.3.0-CUDA-12.6.0
 export NCCL_DEBUG=INFO
 
 TEST_LOCATION="./build/"
-LOG_DIR="runs/1nodes/"
+LOG_DIR="runs/1node/"
 
 mkdir -p $LOG_DIR
-
-echo "Infiniband speed:"
-ibstat | grep -A 3 -B 3 "Rate"
 
 
 echo "Testing All-Reduce"
