@@ -1,0 +1,47 @@
+	Port 1:
+		State: Active
+		Physical state: LinkUp
+		Rate: 25
+		Base lid: 0
+		LMC: 0
+		SM lid: 0
+--
+	Port 1:
+		State: Down
+		Physical state: Disabled
+		Rate: 40
+		Base lid: 0
+		LMC: 0
+		SM lid: 0
+--
+	Port 1:
+		State: Active
+		Physical state: LinkUp
+		Rate: 200
+		Base lid: 2304
+		LMC: 0
+		SM lid: 98
+--
+	Port 1:
+		State: Active
+		Physical state: LinkUp
+		Rate: 200
+		Base lid: 2241
+		LMC: 0
+		SM lid: 98
+--
+	Port 1:
+		State: Active
+		Physical state: LinkUp
+		Rate: 200
+		Base lid: 2426
+		LMC: 0
+		SM lid: 98
+--
+	Port 1:
+		State: Active
+		Physical state: LinkUp
+		Rate: 200
+		Base lid: 2368
+		LMC: 0
+		SM lid: 98

@@ -1,0 +1,225 @@
+# Collective test starting: reduce_scatter_perf
+# nThread 1 nGpus 4 minBytes 4 maxBytes 134217728 step: 2(factor) warmup iters: 5 iters: 20 agg iters: 1 validation: 1 graph: 0
+#
+# Using devices
+#  Rank  0 Group  0 Pid 1539525 on     gcn155 device  0 [0000:06:00] NVIDIA H100
+#  Rank  1 Group  0 Pid 1539525 on     gcn155 device  1 [0000:26:00] NVIDIA H100
+#  Rank  2 Group  0 Pid 1539525 on     gcn155 device  2 [0000:a6:00] NVIDIA H100
+#  Rank  3 Group  0 Pid 1539525 on     gcn155 device  3 [0000:c6:00] NVIDIA H100
+gcn155:1539525:1539525 [0] NCCL INFO NCCL_SOCKET_IFNAME set by environment to eno2np0
+gcn155:1539525:1539525 [0] NCCL INFO Bootstrap : Using eno2np0:172.18.62.155<0>
+gcn155:1539525:1539525 [0] NCCL INFO cudaDriverVersion 12090
+gcn155:1539525:1539525 [3] NCCL INFO NCCL version 2.22.3+cuda12.6
+gcn155:1539525:1539547 [1] NCCL INFO NET/Plugin: Could not find: libnccl-net.so. Using internal network plugin.
+gcn155:1539525:1539549 [3] NCCL INFO NET/Plugin: Could not find: libnccl-net.so. Using internal network plugin.
+gcn155:1539525:1539547 [1] NCCL INFO NCCL_SOCKET_IFNAME set by environment to eno2np0
+gcn155:1539525:1539547 [1] NCCL INFO NET/IB : Using [0]mlx5_0:1/RoCE [1]mlx5_2:1/IB [2]mlx5_3:1/IB [3]mlx5_4:1/IB [4]mlx5_5:1/IB [RO]; OOB eno2np0:172.18.62.155<0>
+gcn155:1539525:1539547 [1] NCCL INFO Using network IB
+gcn155:1539525:1539546 [0] NCCL INFO Using network IB
+gcn155:1539525:1539548 [2] NCCL INFO Using network IB
+gcn155:1539525:1539549 [3] NCCL INFO Using network IB
+gcn155:1539525:1539547 [1] NCCL INFO ncclCommInitRank comm 0x4518180 rank 1 nranks 4 cudaDev 1 nvmlDev 1 busId 26000 commId 0x20fede6a967c4dc4 - Init START
+gcn155:1539525:1539549 [3] NCCL INFO ncclCommInitRank comm 0x45834a0 rank 3 nranks 4 cudaDev 3 nvmlDev 3 busId c6000 commId 0x20fede6a967c4dc4 - Init START
+gcn155:1539525:1539548 [2] NCCL INFO ncclCommInitRank comm 0x454db10 rank 2 nranks 4 cudaDev 2 nvmlDev 2 busId a6000 commId 0x20fede6a967c4dc4 - Init START
+gcn155:1539525:1539546 [0] NCCL INFO ncclCommInitRank comm 0x44e27f0 rank 0 nranks 4 cudaDev 0 nvmlDev 0 busId 6000 commId 0x20fede6a967c4dc4 - Init START
+gcn155:1539525:1539547 [1] NCCL INFO Setting affinity for GPU 1 to ffffffff
+gcn155:1539525:1539546 [0] NCCL INFO Setting affinity for GPU 0 to ffffffff
+gcn155:1539525:1539549 [3] NCCL INFO Setting affinity for GPU 3 to ffffffff,00000000
+gcn155:1539525:1539547 [1] NCCL INFO NVLS multicast support is not available on dev 1
+gcn155:1539525:1539546 [0] NCCL INFO NVLS multicast support is not available on dev 0
+gcn155:1539525:1539549 [3] NCCL INFO NVLS multicast support is not available on dev 3
+gcn155:1539525:1539548 [2] NCCL INFO Setting affinity for GPU 2 to ffffffff,00000000
+gcn155:1539525:1539548 [2] NCCL INFO NVLS multicast support is not available on dev 2
+gcn155:1539525:1539547 [1] NCCL INFO comm 0x4518180 rank 1 nRanks 4 nNodes 1 localRanks 4 localRank 1 MNNVL 0
+gcn155:1539525:1539546 [0] NCCL INFO comm 0x44e27f0 rank 0 nRanks 4 nNodes 1 localRanks 4 localRank 0 MNNVL 0
+gcn155:1539525:1539547 [1] NCCL INFO Trees [0] 2/-1/-1->1->0 [1] 2/-1/-1->1->0 [2] 2/-1/-1->1->0 [3] 2/-1/-1->1->0 [4] 3/-1/-1->1->2 [5] 3/-1/-1->1->2 [6] 3/-1/-1->1->2 [7] 3/-1/-1->1->2 [8] 0/-1/-1->1->-1 [9] 0/-1/-1->1->-1 [10] 0/-1/-1->1->-1 [11] 0/-1/-1->1->-1 [12] 2/-1/-1->1->0 [13] 2/-1/-1->1->0 [14] 2/-1/-1->1->0 [15] 2/-1/-1->1->0 [16] 3/-1/-1->1->2 [17] 3/-1/-1->1->2 [18] 3/-1/-1->1->2 [19] 3/-1/-1->1->2 [20] 0/-1/-1->1->-1 [21] 0/-1/-1->1->-1 [22] 0/-1/-1->1->-1 [23] 0/-1/-1->1->-1
+gcn155:1539525:1539547 [1] NCCL INFO P2P Chunksize set to 524288
+gcn155:1539525:1539549 [3] NCCL INFO comm 0x45834a0 rank 3 nRanks 4 nNodes 1 localRanks 4 localRank 3 MNNVL 0
+gcn155:1539525:1539548 [2] NCCL INFO comm 0x454db10 rank 2 nRanks 4 nNodes 1 localRanks 4 localRank 2 MNNVL 0
+gcn155:1539525:1539549 [3] NCCL INFO Trees [0] -1/-1/-1->3->2 [1] -1/-1/-1->3->2 [2] -1/-1/-1->3->2 [3] -1/-1/-1->3->2 [4] -1/-1/-1->3->1 [5] -1/-1/-1->3->1 [6] -1/-1/-1->3->1 [7] -1/-1/-1->3->1 [8] 2/-1/-1->3->0 [9] 2/-1/-1->3->0 [10] 2/-1/-1->3->0 [11] 2/-1/-1->3->0 [12] -1/-1/-1->3->2 [13] -1/-1/-1->3->2 [14] -1/-1/-1->3->2 [15] -1/-1/-1->3->2 [16] -1/-1/-1->3->1 [17] -1/-1/-1->3->1 [18] -1/-1/-1->3->1 [19] -1/-1/-1->3->1 [20] 2/-1/-1->3->0 [21] 2/-1/-1->3->0 [22] 2/-1/-1->3->0 [23] 2/-1/-1->3->0
+gcn155:1539525:1539549 [3] NCCL INFO P2P Chunksize set to 524288
+gcn155:1539525:1539546 [0] NCCL INFO Channel 00/24 :    0   1   2   3
+gcn155:1539525:1539546 [0] NCCL INFO Channel 01/24 :    0   1   3   2
+gcn155:1539525:1539546 [0] NCCL INFO Channel 02/24 :    0   2   3   1
+gcn155:1539525:1539546 [0] NCCL INFO Channel 03/24 :    0   2   1   3
+gcn155:1539525:1539548 [2] NCCL INFO Trees [0] 3/-1/-1->2->1 [1] 3/-1/-1->2->1 [2] 3/-1/-1->2->1 [3] 3/-1/-1->2->1 [4] 1/-1/-1->2->0 [5] 1/-1/-1->2->0 [6] 1/-1/-1->2->0 [7] 1/-1/-1->2->0 [8] -1/-1/-1->2->3 [9] -1/-1/-1->2->3 [10] -1/-1/-1->2->3 [11] -1/-1/-1->2->3 [12] 3/-1/-1->2->1 [13] 3/-1/-1->2->1 [14] 3/-1/-1->2->1 [15] 3/-1/-1->2->1 [16] 1/-1/-1->2->0 [17] 1/-1/-1->2->0 [18] 1/-1/-1->2->0 [19] 1/-1/-1->2->0 [20] -1/-1/-1->2->3 [21] -1/-1/-1->2->3 [22] -1/-1/-1->2->3 [23] -1/-1/-1->2->3
+gcn155:1539525:1539548 [2] NCCL INFO P2P Chunksize set to 524288
+gcn155:1539525:1539546 [0] NCCL INFO Channel 04/24 :    0   3   1   2
+gcn155:1539525:1539546 [0] NCCL INFO Channel 05/24 :    0   3   2   1
+gcn155:1539525:1539546 [0] NCCL INFO Channel 06/24 :    0   1   2   3
+gcn155:1539525:1539546 [0] NCCL INFO Channel 07/24 :    0   1   3   2
+gcn155:1539525:1539546 [0] NCCL INFO Channel 08/24 :    0   2   3   1
+gcn155:1539525:1539546 [0] NCCL INFO Channel 09/24 :    0   2   1   3
+gcn155:1539525:1539546 [0] NCCL INFO Channel 10/24 :    0   3   1   2
+gcn155:1539525:1539546 [0] NCCL INFO Channel 11/24 :    0   3   2   1
+gcn155:1539525:1539546 [0] NCCL INFO Channel 12/24 :    0   1   2   3
+gcn155:1539525:1539546 [0] NCCL INFO Channel 13/24 :    0   1   3   2
+gcn155:1539525:1539546 [0] NCCL INFO Channel 14/24 :    0   2   3   1
+gcn155:1539525:1539546 [0] NCCL INFO Channel 15/24 :    0   2   1   3
+gcn155:1539525:1539546 [0] NCCL INFO Channel 16/24 :    0   3   1   2
+gcn155:1539525:1539546 [0] NCCL INFO Channel 17/24 :    0   3   2   1
+gcn155:1539525:1539546 [0] NCCL INFO Channel 18/24 :    0   1   2   3
+gcn155:1539525:1539546 [0] NCCL INFO Channel 19/24 :    0   1   3   2
+gcn155:1539525:1539546 [0] NCCL INFO Channel 20/24 :    0   2   3   1
+gcn155:1539525:1539546 [0] NCCL INFO Channel 21/24 :    0   2   1   3
+gcn155:1539525:1539546 [0] NCCL INFO Channel 22/24 :    0   3   1   2
+gcn155:1539525:1539546 [0] NCCL INFO Channel 23/24 :    0   3   2   1
+gcn155:1539525:1539546 [0] NCCL INFO Trees [0] 1/-1/-1->0->-1 [1] 1/-1/-1->0->-1 [2] 1/-1/-1->0->-1 [3] 1/-1/-1->0->-1 [4] 2/-1/-1->0->-1 [5] 2/-1/-1->0->-1 [6] 2/-1/-1->0->-1 [7] 2/-1/-1->0->-1 [8] 3/-1/-1->0->1 [9] 3/-1/-1->0->1 [10] 3/-1/-1->0->1 [11] 3/-1/-1->0->1 [12] 1/-1/-1->0->-1 [13] 1/-1/-1->0->-1 [14] 1/-1/-1->0->-1 [15] 1/-1/-1->0->-1 [16] 2/-1/-1->0->-1 [17] 2/-1/-1->0->-1 [18] 2/-1/-1->0->-1 [19] 2/-1/-1->0->-1 [20] 3/-1/-1->0->1 [21] 3/-1/-1->0->1 [22] 3/-1/-1->0->1 [23] 3/-1/-1->0->1
+gcn155:1539525:1539546 [0] NCCL INFO P2P Chunksize set to 524288
+gcn155:1539525:1539549 [3] NCCL INFO threadThresholds 8/8/64 | 32/8/64 | 512 | 512
+gcn155:1539525:1539549 [3] NCCL INFO 24 coll channels, 24 collnet channels, 0 nvls channels, 32 p2p channels, 16 p2p channels per peer
+gcn155:1539525:1539548 [2] NCCL INFO threadThresholds 8/8/64 | 32/8/64 | 512 | 512
+gcn155:1539525:1539548 [2] NCCL INFO 24 coll channels, 24 collnet channels, 0 nvls channels, 32 p2p channels, 16 p2p channels per peer
+gcn155:1539525:1539547 [1] NCCL INFO threadThresholds 8/8/64 | 32/8/64 | 512 | 512
+gcn155:1539525:1539547 [1] NCCL INFO 24 coll channels, 24 collnet channels, 0 nvls channels, 32 p2p channels, 16 p2p channels per peer
+gcn155:1539525:1539546 [0] NCCL INFO threadThresholds 8/8/64 | 32/8/64 | 512 | 512
+gcn155:1539525:1539546 [0] NCCL INFO 24 coll channels, 24 collnet channels, 0 nvls channels, 32 p2p channels, 16 p2p channels per peer
+gcn155:1539525:1539546 [0] NCCL INFO CC Off, Multi-GPU CC Off, workFifoBytes 1048576
+gcn155:1539525:1539547 [1] NCCL INFO TUNER/Plugin: Could not find: libnccl-tuner.so libnccl-net.so. Using internal tuner plugin.
+gcn155:1539525:1539547 [1] NCCL INFO ncclCommInitRank comm 0x4518180 rank 1 nranks 4 cudaDev 1 nvmlDev 1 busId 26000 commId 0x20fede6a967c4dc4 - Init COMPLETE
+gcn155:1539525:1539547 [1] NCCL INFO Init timings: rank 1 nranks 4 total 1.13 (kernels 0.46, bootstrap 0.55, allgathers 0.00, topo 0.03, graphs 0.02, connections 0.05, rest 0.02)
+gcn155:1539525:1539549 [3] NCCL INFO ncclCommInitRank comm 0x45834a0 rank 3 nranks 4 cudaDev 3 nvmlDev 3 busId c6000 commId 0x20fede6a967c4dc4 - Init COMPLETE
+gcn155:1539525:1539548 [2] NCCL INFO ncclCommInitRank comm 0x454db10 rank 2 nranks 4 cudaDev 2 nvmlDev 2 busId a6000 commId 0x20fede6a967c4dc4 - Init COMPLETE
+gcn155:1539525:1539546 [0] NCCL INFO ncclCommInitRank comm 0x44e27f0 rank 0 nranks 4 cudaDev 0 nvmlDev 0 busId 6000 commId 0x20fede6a967c4dc4 - Init COMPLETE
+gcn155:1539525:1539546 [0] NCCL INFO Init timings: rank 0 nranks 4 total 1.13 (kernels 0.46, bootstrap 0.54, allgathers 0.00, topo 0.03, graphs 0.02, connections 0.05, rest 0.02)
+gcn155:1539525:1539548 [2] NCCL INFO Init timings: rank 2 nranks 4 total 1.13 (kernels 0.46, bootstrap 0.54, allgathers 0.00, topo 0.03, graphs 0.02, connections 0.05, rest 0.02)
+gcn155:1539525:1539549 [3] NCCL INFO Init timings: rank 3 nranks 4 total 1.13 (kernels 0.46, bootstrap 0.54, allgathers 0.00, topo 0.03, graphs 0.02, connections 0.04, rest 0.02)
+#
+#                                                              out-of-place                       in-place          
+#       size         count      type   redop    root     time   algbw   busbw #wrong     time   algbw   busbw #wrong
+#        (B)    (elements)                               (us)  (GB/s)  (GB/s)            (us)  (GB/s)  (GB/s)       
+gcn155:1539525:1539564 [2] NCCL INFO Channel 00/0 : 2[2] -> 3[3] via P2P/direct pointer
+gcn155:1539525:1539564 [2] NCCL INFO Channel 02/0 : 2[2] -> 3[3] via P2P/direct pointer
+gcn155:1539525:1539567 [0] NCCL INFO Channel 00/0 : 0[0] -> 1[1] via P2P/direct pointer
+gcn155:1539525:1539564 [2] NCCL INFO Channel 06/0 : 2[2] -> 3[3] via P2P/direct pointer
+gcn155:1539525:1539565 [1] NCCL INFO Channel 00/0 : 1[1] -> 2[2] via P2P/direct pointer
+gcn155:1539525:1539563 [3] NCCL INFO Channel 00/0 : 3[3] -> 0[0] via P2P/direct pointer
+gcn155:1539525:1539564 [2] NCCL INFO Channel 08/0 : 2[2] -> 3[3] via P2P/direct pointer
+gcn155:1539525:1539567 [0] NCCL INFO Channel 01/0 : 0[0] -> 1[1] via P2P/direct pointer
+gcn155:1539525:1539565 [1] NCCL INFO Channel 04/0 : 1[1] -> 2[2] via P2P/direct pointer
+gcn155:1539525:1539563 [3] NCCL INFO Channel 03/0 : 3[3] -> 0[0] via P2P/direct pointer
+gcn155:1539525:1539564 [2] NCCL INFO Channel 12/0 : 2[2] -> 3[3] via P2P/direct pointer
+gcn155:1539525:1539567 [0] NCCL INFO Channel 06/0 : 0[0] -> 1[1] via P2P/direct pointer
+gcn155:1539525:1539563 [3] NCCL INFO Channel 06/0 : 3[3] -> 0[0] via P2P/direct pointer
+gcn155:1539525:1539567 [0] NCCL INFO Channel 07/0 : 0[0] -> 1[1] via P2P/direct pointer
+gcn155:1539525:1539565 [1] NCCL INFO Channel 06/0 : 1[1] -> 2[2] via P2P/direct pointer
+gcn155:1539525:1539564 [2] NCCL INFO Channel 14/0 : 2[2] -> 3[3] via P2P/direct pointer
+gcn155:1539525:1539563 [3] NCCL INFO Channel 09/0 : 3[3] -> 0[0] via P2P/direct pointer
+gcn155:1539525:1539567 [0] NCCL INFO Channel 12/0 : 0[0] -> 1[1] via P2P/direct pointer
+gcn155:1539525:1539564 [2] NCCL INFO Channel 18/0 : 2[2] -> 3[3] via P2P/direct pointer
+gcn155:1539525:1539565 [1] NCCL INFO Channel 10/0 : 1[1] -> 2[2] via P2P/direct pointer
+gcn155:1539525:1539563 [3] NCCL INFO Channel 12/0 : 3[3] -> 0[0] via P2P/direct pointer
+gcn155:1539525:1539567 [0] NCCL INFO Channel 13/0 : 0[0] -> 1[1] via P2P/direct pointer
+gcn155:1539525:1539564 [2] NCCL INFO Channel 20/0 : 2[2] -> 3[3] via P2P/direct pointer
+gcn155:1539525:1539565 [1] NCCL INFO Channel 12/0 : 1[1] -> 2[2] via P2P/direct pointer
+gcn155:1539525:1539563 [3] NCCL INFO Channel 15/0 : 3[3] -> 0[0] via P2P/direct pointer
+gcn155:1539525:1539567 [0] NCCL INFO Channel 18/0 : 0[0] -> 1[1] via P2P/direct pointer
+gcn155:1539525:1539565 [1] NCCL INFO Channel 16/0 : 1[1] -> 2[2] via P2P/direct pointer
+gcn155:1539525:1539563 [3] NCCL INFO Channel 18/0 : 3[3] -> 0[0] via P2P/direct pointer
+gcn155:1539525:1539567 [0] NCCL INFO Channel 19/0 : 0[0] -> 1[1] via P2P/direct pointer
+gcn155:1539525:1539565 [1] NCCL INFO Channel 18/0 : 1[1] -> 2[2] via P2P/direct pointer
+gcn155:1539525:1539563 [3] NCCL INFO Channel 21/0 : 3[3] -> 0[0] via P2P/direct pointer
+gcn155:1539525:1539565 [1] NCCL INFO Channel 22/0 : 1[1] -> 2[2] via P2P/direct pointer
+gcn155:1539525:1539563 [3] NCCL INFO Channel 02/0 : 3[3] -> 1[1] via P2P/direct pointer
+gcn155:1539525:1539567 [0] NCCL INFO Channel 02/0 : 0[0] -> 2[2] via P2P/direct pointer
+gcn155:1539525:1539564 [2] NCCL INFO Channel 01/0 : 2[2] -> 0[0] via P2P/direct pointer
+gcn155:1539525:1539565 [1] NCCL INFO Channel 01/0 : 1[1] -> 3[3] via P2P/direct pointer
+gcn155:1539525:1539563 [3] NCCL INFO Channel 04/0 : 3[3] -> 1[1] via P2P/direct pointer
+gcn155:1539525:1539567 [0] NCCL INFO Channel 03/0 : 0[0] -> 2[2] via P2P/direct pointer
+gcn155:1539525:1539564 [2] NCCL INFO Channel 04/0 : 2[2] -> 0[0] via P2P/direct pointer
+gcn155:1539525:1539565 [1] NCCL INFO Channel 03/0 : 1[1] -> 3[3] via P2P/direct pointer
+gcn155:1539525:1539563 [3] NCCL INFO Channel 08/0 : 3[3] -> 1[1] via P2P/direct pointer
+gcn155:1539525:1539567 [0] NCCL INFO Channel 08/0 : 0[0] -> 2[2] via P2P/direct pointer
+gcn155:1539525:1539564 [2] NCCL INFO Channel 07/0 : 2[2] -> 0[0] via P2P/direct pointer
+gcn155:1539525:1539565 [1] NCCL INFO Channel 07/0 : 1[1] -> 3[3] via P2P/direct pointer
+gcn155:1539525:1539563 [3] NCCL INFO Channel 10/0 : 3[3] -> 1[1] via P2P/direct pointer
+gcn155:1539525:1539564 [2] NCCL INFO Channel 10/0 : 2[2] -> 0[0] via P2P/direct pointer
+gcn155:1539525:1539567 [0] NCCL INFO Channel 09/0 : 0[0] -> 2[2] via P2P/direct pointer
+gcn155:1539525:1539565 [1] NCCL INFO Channel 09/0 : 1[1] -> 3[3] via P2P/direct pointer
+gcn155:1539525:1539563 [3] NCCL INFO Channel 14/0 : 3[3] -> 1[1] via P2P/direct pointer
+gcn155:1539525:1539564 [2] NCCL INFO Channel 13/0 : 2[2] -> 0[0] via P2P/direct pointer
+gcn155:1539525:1539567 [0] NCCL INFO Channel 14/0 : 0[0] -> 2[2] via P2P/direct pointer
+gcn155:1539525:1539565 [1] NCCL INFO Channel 13/0 : 1[1] -> 3[3] via P2P/direct pointer
+gcn155:1539525:1539563 [3] NCCL INFO Channel 16/0 : 3[3] -> 1[1] via P2P/direct pointer
+gcn155:1539525:1539564 [2] NCCL INFO Channel 16/0 : 2[2] -> 0[0] via P2P/direct pointer
+gcn155:1539525:1539567 [0] NCCL INFO Channel 15/0 : 0[0] -> 2[2] via P2P/direct pointer
+gcn155:1539525:1539565 [1] NCCL INFO Channel 15/0 : 1[1] -> 3[3] via P2P/direct pointer
+gcn155:1539525:1539563 [3] NCCL INFO Channel 20/0 : 3[3] -> 1[1] via P2P/direct pointer
+gcn155:1539525:1539564 [2] NCCL INFO Channel 19/0 : 2[2] -> 0[0] via P2P/direct pointer
+gcn155:1539525:1539567 [0] NCCL INFO Channel 20/0 : 0[0] -> 2[2] via P2P/direct pointer
+gcn155:1539525:1539563 [3] NCCL INFO Channel 22/0 : 3[3] -> 1[1] via P2P/direct pointer
+gcn155:1539525:1539565 [1] NCCL INFO Channel 19/0 : 1[1] -> 3[3] via P2P/direct pointer
+gcn155:1539525:1539564 [2] NCCL INFO Channel 22/0 : 2[2] -> 0[0] via P2P/direct pointer
+gcn155:1539525:1539567 [0] NCCL INFO Channel 21/0 : 0[0] -> 2[2] via P2P/direct pointer
+gcn155:1539525:1539565 [1] NCCL INFO Channel 21/0 : 1[1] -> 3[3] via P2P/direct pointer
+gcn155:1539525:1539564 [2] NCCL INFO Channel 03/0 : 2[2] -> 1[1] via P2P/direct pointer
+gcn155:1539525:1539563 [3] NCCL INFO Channel 01/0 : 3[3] -> 2[2] via P2P/direct pointer
+gcn155:1539525:1539565 [1] NCCL INFO Channel 02/0 : 1[1] -> 0[0] via P2P/direct pointer
+gcn155:1539525:1539567 [0] NCCL INFO Channel 04/0 : 0[0] -> 3[3] via P2P/direct pointer
+gcn155:1539525:1539564 [2] NCCL INFO Channel 05/0 : 2[2] -> 1[1] via P2P/direct pointer
+gcn155:1539525:1539563 [3] NCCL INFO Channel 05/0 : 3[3] -> 2[2] via P2P/direct pointer
+gcn155:1539525:1539567 [0] NCCL INFO Channel 05/0 : 0[0] -> 3[3] via P2P/direct pointer
+gcn155:1539525:1539565 [1] NCCL INFO Channel 05/0 : 1[1] -> 0[0] via P2P/direct pointer
+gcn155:1539525:1539564 [2] NCCL INFO Channel 09/0 : 2[2] -> 1[1] via P2P/direct pointer
+gcn155:1539525:1539563 [3] NCCL INFO Channel 07/0 : 3[3] -> 2[2] via P2P/direct pointer
+gcn155:1539525:1539567 [0] NCCL INFO Channel 10/0 : 0[0] -> 3[3] via P2P/direct pointer
+gcn155:1539525:1539565 [1] NCCL INFO Channel 08/0 : 1[1] -> 0[0] via P2P/direct pointer
+gcn155:1539525:1539564 [2] NCCL INFO Channel 11/0 : 2[2] -> 1[1] via P2P/direct pointer
+gcn155:1539525:1539563 [3] NCCL INFO Channel 11/0 : 3[3] -> 2[2] via P2P/direct pointer
+gcn155:1539525:1539567 [0] NCCL INFO Channel 11/0 : 0[0] -> 3[3] via P2P/direct pointer
+gcn155:1539525:1539565 [1] NCCL INFO Channel 11/0 : 1[1] -> 0[0] via P2P/direct pointer
+gcn155:1539525:1539564 [2] NCCL INFO Channel 15/0 : 2[2] -> 1[1] via P2P/direct pointer
+gcn155:1539525:1539563 [3] NCCL INFO Channel 13/0 : 3[3] -> 2[2] via P2P/direct pointer
+gcn155:1539525:1539565 [1] NCCL INFO Channel 14/0 : 1[1] -> 0[0] via P2P/direct pointer
+gcn155:1539525:1539567 [0] NCCL INFO Channel 16/0 : 0[0] -> 3[3] via P2P/direct pointer
+gcn155:1539525:1539564 [2] NCCL INFO Channel 17/0 : 2[2] -> 1[1] via P2P/direct pointer
+gcn155:1539525:1539563 [3] NCCL INFO Channel 17/0 : 3[3] -> 2[2] via P2P/direct pointer
+gcn155:1539525:1539565 [1] NCCL INFO Channel 17/0 : 1[1] -> 0[0] via P2P/direct pointer
+gcn155:1539525:1539567 [0] NCCL INFO Channel 17/0 : 0[0] -> 3[3] via P2P/direct pointer
+gcn155:1539525:1539563 [3] NCCL INFO Channel 19/0 : 3[3] -> 2[2] via P2P/direct pointer
+gcn155:1539525:1539564 [2] NCCL INFO Channel 21/0 : 2[2] -> 1[1] via P2P/direct pointer
+gcn155:1539525:1539565 [1] NCCL INFO Channel 20/0 : 1[1] -> 0[0] via P2P/direct pointer
+gcn155:1539525:1539567 [0] NCCL INFO Channel 22/0 : 0[0] -> 3[3] via P2P/direct pointer
+gcn155:1539525:1539563 [3] NCCL INFO Channel 23/0 : 3[3] -> 2[2] via P2P/direct pointer
+gcn155:1539525:1539564 [2] NCCL INFO Channel 23/0 : 2[2] -> 1[1] via P2P/direct pointer
+gcn155:1539525:1539565 [1] NCCL INFO Channel 23/0 : 1[1] -> 0[0] via P2P/direct pointer
+gcn155:1539525:1539567 [0] NCCL INFO Channel 23/0 : 0[0] -> 3[3] via P2P/direct pointer
+gcn155:1539525:1539567 [0] NCCL INFO Connected all rings
+gcn155:1539525:1539565 [1] NCCL INFO Connected all rings
+gcn155:1539525:1539564 [2] NCCL INFO Connected all rings
+gcn155:1539525:1539563 [3] NCCL INFO Connected all rings
+           0             0     float     sum      -1     0.35    0.00    0.00      0     0.34    0.00    0.00      0
+           0             0     float     sum      -1     0.34    0.00    0.00      0     0.37    0.00    0.00      0
+           0             0     float     sum      -1     0.34    0.00    0.00      0     0.34    0.00    0.00      0
+           0             0     float     sum      -1     0.34    0.00    0.00      0     0.35    0.00    0.00      0
+          64             4     float     sum      -1    18.41    0.00    0.00      0    17.93    0.00    0.00      0
+         128             8     float     sum      -1    18.98    0.01    0.01      0    18.11    0.01    0.01      0
+         256            16     float     sum      -1    18.18    0.01    0.01      0    18.69    0.01    0.01      0
+         512            32     float     sum      -1    18.41    0.03    0.02      0    17.78    0.03    0.02      0
+        1024            64     float     sum      -1    18.43    0.06    0.04      0    17.99    0.06    0.04      0
+        2048           128     float     sum      -1    18.33    0.11    0.08      0    18.08    0.11    0.08      0
+        4096           256     float     sum      -1    18.20    0.22    0.17      0    18.11    0.23    0.17      0
+        8192           512     float     sum      -1    17.81    0.46    0.35      0    18.51    0.44    0.33      0
+       16384          1024     float     sum      -1    18.20    0.90    0.68      0    17.80    0.92    0.69      0
+       32768          2048     float     sum      -1    18.92    1.73    1.30      0    17.95    1.83    1.37      0
+       65536          4096     float     sum      -1    18.93    3.46    2.60      0    18.33    3.57    2.68      0
+      131072          8192     float     sum      -1    19.09    6.87    5.15      0    19.28    6.80    5.10      0
+      262144         16384     float     sum      -1    19.92   13.16    9.87      0    21.01   12.48    9.36      0
+      524288         32768     float     sum      -1    21.23   24.70   18.52      0    20.79   25.22   18.91      0
+     1048576         65536     float     sum      -1    22.82   45.95   34.46      0    21.52   48.73   36.54      0
+     2097152        131072     float     sum      -1    24.09   87.07   65.30      0    23.76   88.25   66.19      0
+     4194304        262144     float     sum      -1    43.84   95.66   71.75      0    43.90   95.54   71.65      0
+     8388608        524288     float     sum      -1    47.10  178.09  133.57      0    47.11  178.08  133.56      0
+    16777216       1048576     float     sum      -1    66.89  250.82  188.12      0    66.03  254.09  190.57      0
+    33554432       2097152     float     sum      -1    110.9  302.48  226.86      0    110.4  303.82  227.86      0
+    67108864       4194304     float     sum      -1    198.0  339.02  254.26      0    196.3  341.82  256.36      0
+   134217728       8388608     float     sum      -1    367.4  365.31  273.98      0    363.7  369.01  276.76      0
+gcn155:1539525:1539525 [0] NCCL INFO comm 0x44e27f0 rank 0 nranks 4 cudaDev 0 busId 6000 - Destroy COMPLETE
+gcn155:1539525:1539525 [3] NCCL INFO comm 0x45834a0 rank 3 nranks 4 cudaDev 3 busId c6000 - Destroy COMPLETE
+gcn155:1539525:1539525 [2] NCCL INFO comm 0x454db10 rank 2 nranks 4 cudaDev 2 busId a6000 - Destroy COMPLETE
+gcn155:1539525:1539525 [1] NCCL INFO comm 0x4518180 rank 1 nranks 4 cudaDev 1 busId 26000 - Destroy COMPLETE
+# Out of bounds values : 0 OK
+# Avg bus bandwidth    : 49.7186 
+#
+# Collective test concluded: reduce_scatter_perf
+
