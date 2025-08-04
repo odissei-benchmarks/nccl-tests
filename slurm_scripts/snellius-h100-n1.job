@@ -1,0 +1,48 @@
+#!/bin/bash
+#
+#SBATCH --job-name=h100_1node
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --time=15:00
+#SBATCH -p gpu_h100
+#SBATCH --gpus-per-node 4
+#SBATCH -e logs/%x-%j.err
+#SBATCH -o logs/%x-%j.out
+
+
+module load 2024
+module load CUDA/12.6.0
+module load NCCL/2.22.3-GCCcore-13.3.0-CUDA-12.6.0  
+
+export NCCL_DEBUG=INFO
+
+TEST_LOCATION="./build/"
+LOG_DIR="runs/1nodes/"
+
+mkdir -p $LOG_DIR
+
+echo "Infiniband speed:"
+ibstat | grep -A 3 -B 3 "Rate"
+
+
+echo "Testing All-Reduce"
+"$TEST_LOCATION/all_reduce_perf" -b 4 -e 128M -f 2 -g 4 \
+    > "$LOG_DIR/all_reduce.log"
+
+
+echo "Testing All-Gather"
+"$TEST_LOCATION/all_gather_perf" -b 4 -e 128M -f 2 -g 4 \
+    > "$LOG_DIR/all_gather_perf.log"
+
+
+echo "Testing All-Reduce"
+"$TEST_LOCATION/reduce_scatter_perf" -b 4 -e 128M -f 2 -g 4 \
+    > "$LOG_DIR/reduce_scatter_perf.log"
+
+
+echo "Stress-testing with many iterations"
+"$TEST_LOCATION/all_reduce_perf" \
+  -b 4 -e 128M -f 2 -g 1 -n 100 -i 5 \
+  > "$LOG_DIR/all_reduce_stresstest.log"
+
+
