@@ -2,7 +2,18 @@
 
 These tests check both the performance and the correctness of [NCCL](http://github.com/nvidia/nccl) operations.
 
+
+## Purpose
+
+- Benchmark multi-node speed on Snellius and OSSC
+- Log details of how devices communicate and detect differences between OSSC and Snellius
+
+
 ## Build
+
+### Snellius/OSSC
+- For Snellius, use `sbatch build_tests.sh` to compile the tests.
+- For OSSC, adapt the script to the respective work environment
 
 To build the tests, just type `make` or `make -j`
 
@@ -29,6 +40,10 @@ This will generate test binaries with names such as `all_reduce_perf_mpi`.
 ## Usage
 
 NCCL tests can run on multiple processes, multiple threads, and multiple CUDA devices per thread. The number of process is managed by MPI and is therefore not passed to the tests as argument. The total number of ranks (=CUDA devices) will be equal to `(number of processes)*(number of threads)*(number of GPUs per thread)`.
+
+### Snellius/OSSC
+- Use scripts in `slurm_scripts` to run tests on either system.
+- Be sure to use the same settings in order to have comparable experiments.
 
 ### Quick examples
 
