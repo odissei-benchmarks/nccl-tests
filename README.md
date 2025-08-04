@@ -1,4 +1,4 @@
-# NCCL Tests
+# NCCL Tests for OSSC and Snellius
 
 These tests check both the performance and the correctness of [NCCL](http://github.com/nvidia/nccl) operations.
 
@@ -14,6 +14,9 @@ These tests check both the performance and the correctness of [NCCL](http://gith
 ### Snellius/OSSC
 - For Snellius, use `sbatch build_tests.sh` to compile the tests.
 - For OSSC, adapt the script to the respective work environment
+
+
+### Detailed instructions
 
 To build the tests, just type `make` or `make -j`
 
